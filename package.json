@@ -1,49 +1,39 @@
-import {
-  vitePlugin as remix,
-  cloudflareDevProxyVitePlugin as remixCloudflareDevProxy,
-} from '@remix-run/dev';
-import { defineConfig } from 'vite';
-import jsconfigPaths from 'vite-jsconfig-paths';
-import mdx from '@mdx-js/rollup';
-import remarkFrontmatter from 'remark-frontmatter';
-import remarkMdxFrontmatter from 'remark-mdx-frontmatter';
-import rehypeImgSize from 'rehype-img-size';
-import rehypeSlug from 'rehype-slug';
-import rehypePrism from '@mapbox/rehype-prism';
-
-// 🔥 IMPORTANTE:
-// Cloudflare Dev Proxy SÓ em desenvolvimento
-const isDev = process.env.NODE_ENV !== 'production';
-
-export default defineConfig({
-  assetsInclude: ['**/*.glb', '**/*.hdr', '**/*.glsl'],
-
-  build: {
-    assetsInlineLimit: 1024,
+{
+  "name": "portfolio",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "remix vite:dev",
+    "build": "remix vite:build",
+    "start": "remix-serve build",
+    "postinstall": "node ./scripts/draco.cjs"
   },
-
-  server: {
-    port: 7777,
+  "dependencies": {
+    "@aws-sdk/client-ses": "^3.515.0",
+    "@mdx-js/react": "^3.0.1",
+    "@remix-run/node": "^2.17.4",
+    "@remix-run/react": "^2.17.4",
+    "@remix-run/serve": "^2.17.4",
+    "framer-motion": "11.0.5",
+    "isbot": "^4.1.0",
+    "miniflare": "^3.20231030.4",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "rehype-img-size": "^1.0.1",
+    "rehype-slug": "^6.0.0",
+    "three": "^0.161.0",
+    "three-stdlib": "^2.29.4"
   },
-
-  plugins: [
-    mdx({
-      rehypePlugins: [[rehypeImgSize, { dir: 'public' }], rehypeSlug, rehypePrism],
-      remarkPlugins: [remarkFrontmatter, remarkMdxFrontmatter],
-      providerImportSource: '@mdx-js/react',
-    }),
-
-    // ✅ Cloudflare Dev Proxy APENAS em DEV (evita EPIPE na Vercel)
-    ...(isDev ? [remixCloudflareDevProxy()] : []),
-
-    remix({
-      routes(defineRoutes) {
-        return defineRoutes(route => {
-          route('/', 'routes/home/route.js', { index: true });
-        });
-      },
-    }),
-
-    jsconfigPaths(),
-  ],
-});
+  "devDependencies": {
+    "@mdx-js/rollup": "^3.0.1",
+    "@remix-run/dev": "^2.17.4",
+    "@mapbox/rehype-prism": "^0.9.0",
+    "remark-frontmatter": "^5.0.0",
+    "remark-mdx-frontmatter": "^4.0.0",
+    "vite": "^5.4.0",
+    "vite-jsconfig-paths": "^2.0.1"
+  },
+  "engines": {
+    "node": "24.x"
+  }
+}
