@@ -1,4 +1,4 @@
-import { createPagesFunctionHandler } from '@remix-run/cloudflare-pages';
+import { createPagesFunctionHandler } from '@remix-run/node';
 
 import * as build from '../build/server';
 
