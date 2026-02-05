@@ -62,12 +62,6 @@
     "wrangler": "^3.24.0"
   },
   "engines": {
-    "node": "24.x"11:50:20.884 Running build in Washington, D.C., USA (East) – iad1
-11:50:20.885 Build machine configuration: 2 cores, 8 GB
-11:50:21.094 Cloning github.com/Philippe1230/Penguin-s-Site (Branch: main, Commit: 5b4a938)
-11:50:21.095 Previous build caches not available.
-11:50:23.135 Cloning completed: 2.041s
-11:50:23.530 Error: Found invalid or discontinued Node.js Version: "18.x". Please set "engines": { "node": "24.x" } in your `package.json` file to use Node.js 24. Learn More: https://vercel.link/node-version
-11:50:23.784 Found invalid or discontinued Node.js Version: "18.x". Please set "engines": { "node": "24.x" } in your `package.json` file to use Node.js 24.
-  }
+    "node": "24.x"
+    }
 }
