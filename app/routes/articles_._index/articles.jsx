@@ -59,7 +59,7 @@ function FeaturedPost({ slug, frontmatter }) {
 
           <div className={styles.postFooter}>
             <Button secondary iconHoverShift icon="chevron-right" as="div">
-              Leia mais
+              Nossos Serviços
             </Button>
 
             <Text className={styles.timecode} size="s">

@@ -2,7 +2,7 @@
 
 .articles {
   display: grid;
-  align-items: start;
+  align-items: center;
   justify-items: center;
   grid-template-rows: 1fr auto;
   min-height: 100%;
@@ -13,7 +13,7 @@
 }
 
 .grid {
-  --verticalPadding: var(--space4XL);
+  --verticalPadding: calc(var(--space4XL) + var(--space3XL));
 
   max-width: 1800px;
   display: grid;
@@ -27,8 +27,7 @@
   height: 100%;
 
   @media (--mediaDesktop) {
-    --verticalPadding: var(--spaceOuter);
-
+    --verticalPadding: calc(var(--spaceOuter) + var(--space4XL));
     gap: var(--space4XL);
     padding-left: 0;
   }
@@ -46,9 +45,10 @@
   @media (--mediaMobile), (--mediaMobileLS) {
     gap: var(--space2XL);
     padding-bottom: var(--spaceXL);
-    padding-top: var(--mobileNavOffset);
+    padding-top: calc(var(--mobileNavOffset) + var(--spaceXL));
   }
 }
+
 
 .header {
   padding-top: var(--spaceS);
@@ -387,3 +387,28 @@
     animation: fade-in 0.8s var(--bezierFastoutSlowin) forwards 0.4s;
   }
 }
+
+
+@media (--mediaMobile), (--mediaMobileLS) {
+  .articles {
+    align-items: start;
+  }
+
+  .grid {
+    align-items: start;
+  }
+}
+
+.articles {
+  padding-top: var(--navHeight);
+}
+
+.grid {
+  min-height: calc(100vh - var(--navHeight));
+  align-items: center;
+}
+
+body {
+  padding-top: 120px; /* ajusta o valor */
+}
+

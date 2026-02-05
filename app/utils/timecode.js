@@ -1,5 +1,5 @@
 /**
- * Format a timecode intro a hours:minutes:seconds:centiseconds string
+ * Format a timecode into a hours:minutes:seconds:centiseconds string
  */
 export function formatTimecode(time) {
   const hours = time / 1000 / 60 / 60;
@@ -19,9 +19,25 @@ export function zeroPrefix(value) {
   return value < 10 ? `0${value}` : `${value}`;
 }
 
+/**
+ * Calculate reading time in milliseconds (safe for MDX / SSR)
+ */
 export function readingTime(text) {
   const wpm = 225;
-  const words = text.trim().split(/\s+/).length;
-  const time = words / wpm;
-  return time * 1000 * 60;
+
+  // 🔒 Proteção total contra valores inválidos
+  if (typeof text !== 'string') {
+    return 60 * 1000; // 1 min
+  }
+
+  const cleanText = text.trim();
+
+  if (!cleanText) {
+    return 60 * 1000; // 1 min
+  }
+
+  const words = cleanText.split(/\s+/).length;
+  const minutes = Math.max(1, words / wpm);
+
+  return minutes * 1000 * 60;
 }

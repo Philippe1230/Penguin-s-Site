@@ -22,8 +22,13 @@ export const Navbar = () => {
   const location = useLocation();
   const windowSize = useWindowSize();
   const headerRef = useRef();
-  const isMobile = windowSize.width <= media.mobile || windowSize.height <= 696;
   const scrollToHash = useScrollToHash();
+
+  // ✅ SSR-safe mobile detection (ESSENCIAL)
+  const isMobile =
+    !windowSize?.width ||
+    windowSize.width <= media.mobile ||
+    windowSize.height <= 696;
 
   useEffect(() => {
     // Prevent ssr mismatch by storing this in state
